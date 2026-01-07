@@ -1,0 +1,396 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #111;
+}
+
+/*snowfall*/
+.snow{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, white, transparent),
+        radial-gradient(3px 3px at 40px 70px, white, transparent),
+        radial-gradient(2px 2px at 90px 40px, white, transparent),
+        radial-gradient(3px 3px at 130px 80px, white, transparent),
+        radial-gradient(2px 2px at 160px 20px, white, transparent);
+    background-size: 200px 200px;
+    animation: snowFall 10s linear infinite;
+    z-index: 0;
+}
+
+/*snowman*/
+.snowman{
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+}
+
+/*snowman's head*/
+.head{
+    width: 180px;
+    height: 180px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: relative;
+    overflow: visible;
+}
+
+/*snowman's eyes*/
+.eyes{
+    text-align: center;
+    margin-top: 40px;
+}
+.eyes span{
+    display: inline-block;
+    width: 15px;
+    height: 0px;
+    background: #333;
+    border-radius: 50%;
+    margin: 0 20px;
+    animation: eyes 0.5s linear forwards;
+    animation-delay: 0.5s;
+}
+
+/*snowman's nose*/
+.nose{
+    width: 15px;
+    height: 0px;
+    background: red;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: nose 0.5s linear forwards;
+    animation-delay: 0.8s;
+}
+
+/*snowman's mouth*/
+.mouth{
+    width: 0px;
+    height: 15px;
+    background: #333;
+    border-radius: 50%;
+    margin: 15px auto;
+    animation: mouth 0.5s linear forwards;
+    animation-delay: 1.5s;
+}
+
+/*snowman's body*/
+.body{
+    width: 0px;
+    height: 0px;
+    background: #fff;
+    border-radius: 50%;
+    margin-top: -40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: body 1s linear forwards;
+    animation-delay: 1s;
+}
+.body span{
+    width: 12px;
+    height: 12px;
+    background: #333;
+    border-radius: 50%;
+    margin: 5px;
+    transform: translateY(20px);
+    visibility: hidden;
+    animation: dots 0.5s linear forwards;
+    animation-delay: 2.5s;
+}
+
+/*snowman's hat*/
+.hat{
+    position: absolute;
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-10deg);
+    width: 130px;
+    height: 70px;
+    background: red;
+    border-radius: 10px 10px 0 0;
+    animation: hatDrop 1s ease-out forwards;
+    animation-delay: 3s;
+    opacity: 0;
+}
+.hat::before{
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: -10px;
+    width: 150px;
+    height: 25px;
+    background: #fff;
+    border-radius: 20px;
+}
+.pom{
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+/*snowman's antlers*/
+.antlers{
+    position: absolute;
+    top: -10px;             
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 0;             
+}
+.antlers span{
+    position: relative;
+    width: 12px;
+    height: 80px;
+    background: #7b4a12;
+    border-radius: 10px;
+}
+.antlers span::after{
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 18px;
+    background: #fff;      
+    border-radius: 50%;
+}
+.antlers .left::before,
+.antlers .left::after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 32px;
+    background: #7b4a12;
+    border-radius: 10px;
+    left: -12px;
+}
+.antlers .left::before{
+    top: 15px;
+    transform: rotate(-35deg);
+}
+.antlers .left::after{
+    top: 40px;
+    transform: rotate(-20deg);
+}
+.antlers .right::before,
+.antlers .right::after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 32px;
+    background: #7b4a12;
+    border-radius: 10px;
+    right: -12px;
+}
+.antlers .right::before{
+    top: 15px;
+    transform: rotate(35deg);
+}
+.antlers .right::after{
+    top: 40px;
+    transform: rotate(20deg);
+}
+.antlers .left {
+    animation: leftAntlerSway 3s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+.antlers .right {
+    animation: rightAntlerSway 3s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+
+.legs {
+    position: absolute;
+    top: 360px; 
+    width: 250px; 
+    display: flex;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+.legs span {
+    display: block;
+    width: 60px;       
+    height: 25px;      
+    background: #fff; 
+    border-radius: 50% 50% 50% 50%; 
+    position: relative;
+    transform-origin: top center;
+}
+.legs .left {
+    margin-left: 1px; 
+    transform: rotate(5deg);
+    animation: legSwayLeft 3s ease-in-out infinite;
+}
+
+.legs .right {
+    margin-right: 1px; 
+    transform: rotate(-5deg);
+    animation: legSwayRight 3s ease-in-out infinite;
+}
+
+@keyframes legSwayLeft {
+    0%   { transform: rotate(5deg); }
+    50%  { transform: rotate(0deg); }
+    100% { transform: rotate(5deg); }
+}
+
+@keyframes legSwayRight {
+    0%   { transform: rotate(-5deg); }
+    50%  { transform: rotate(0deg); }
+    100% { transform: rotate(-5deg); }
+}
+
+@keyframes body {
+    100%{
+        width: 250px;
+        height: 250px;
+    }
+}
+@keyframes eyes {
+    100%{
+        height: 25px;
+    }
+}
+@keyframes nose {
+    100%{
+        height: 30px;
+    }
+}
+@keyframes mouth {
+    100%{
+        width: 40px;
+    }
+}
+@keyframes dots {
+    100%{
+        transform: translateY(0);
+        visibility: visible;
+    }
+}
+@keyframes hatDrop {
+    0%{
+        top: -150px;
+        opacity: 0;
+        transform: translateX(-50%) rotate(-25deg);
+    }
+    70%{
+        top: -60px;
+        opacity: 1;
+        transform: translateX(-50%) rotate(-10deg);
+    }
+    85%{
+        top: -70px;
+    }
+    100%{
+        top: -55px;
+        opacity: 1;
+        transform: translateX(-50%) rotate(-8deg);
+    }
+}
+@keyframes snowFall {
+    0%{background-position: 0 0;}
+    100%{background-position: 0 600px;}
+}
+@keyframes leftAntlerSway {
+    0% { transform: rotate(0deg); }
+    20% { transform: rotate(4deg); }
+    40% { transform: rotate(-3deg); }
+    60% { transform: rotate(2deg); }
+    80% { transform: rotate(-2deg); }
+    100% { transform: rotate(0deg); }
+}
+@keyframes rightAntlerSway {
+    0% { transform: rotate(0deg); }
+    20% { transform: rotate(-4deg); }
+    40% { transform: rotate(3deg); }
+    60% { transform: rotate(-2deg); }
+    80% { transform: rotate(2deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.arms {
+    position: absolute;
+    top: 220px; 
+    width: 250px; 
+    display: flex;
+    justify-content: space-between;
+    z-index: 1;
+}
+.arms span {
+    display: block;
+    width: 60px;        
+    height: 20px;       
+    background: #fff;   
+    border-radius: 50% 50% 50% 50%; 
+    position: relative;
+    transform-origin: center center;
+}
+
+.arms .left {
+    transform: rotate(-20deg);
+    margin-left: -30px; 
+    animation: armSwayLeft 3s ease-in-out infinite;
+}
+
+.arms .right {
+    transform: rotate(20deg);
+    margin-right: -30px;
+    animation: armSwayRight 3s ease-in-out infinite;
+    
+}
+
+@keyframes armSwayLeft {
+    0%   { transform: rotate(-20deg); }
+    25%  { transform: rotate(-30deg); }
+    50%  { transform: rotate(-20deg); }
+    75%  { transform: rotate(-25deg); }
+    100% { transform: rotate(-20deg); }
+}
+
+@keyframes armSwayRight {
+    0%   { transform: rotate(20deg); }
+    25%  { transform: rotate(30deg); }
+    50%  { transform: rotate(20deg); }
+    75%  { transform: rotate(25deg); }
+    100% { transform: rotate(20deg); }
+}
+
+@keyframes legSwayLeft {
+    0%   { transform: rotate(5deg) translateY(0); }
+    25%  { transform: rotate(0deg) translateY(2px); }
+    50%  { transform: rotate(5deg) translateY(0); }
+    75%  { transform: rotate(2deg) translateY(1px); }
+    100% { transform: rotate(5deg) translateY(0); }
+}
+
+@keyframes legSwayRight {
+    0%   { transform: rotate(-5deg) translateY(0); }
+    25%  { transform: rotate(0deg) translateY(2px); }
+    50%  { transform: rotate(-5deg) translateY(0); }
+    75%  { transform: rotate(-2deg) translateY(1px); }
+    100% { transform: rotate(-5deg) translateY(0); }
+}
+
